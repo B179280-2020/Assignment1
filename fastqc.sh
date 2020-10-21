@@ -36,8 +36,12 @@ cd ../
 for i in 216 218 219 220 221 222
 do
 bowtie2 -x ./ref/Tbb -1 ./data/$i"_L8_1.fq" -2 ./data/$i"_L8_2.fq" -S ./data/"$i".sam
-done
 
+#change .sam to .bam, sort the bam file and index them
+samtools view -S -b ./data/$i".sam" > ./data/$i".bam"
+samtools sort ./data/$i".bam" -o ./data/$i".sorted.bam"
+samtools index ./data/$i".sorted.bam"
+done
 
 
 
