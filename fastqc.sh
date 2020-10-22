@@ -39,4 +39,20 @@ samtools view -S -b ./data/$number.$type.sam > ./data/$number.$type.bam
 samtools sort ./data/$number.$type.bam -o ./data/$number.$type.sorted.bam
 samtools index ./data/$number.$type.sorted.bam
 done < ./data/fqfiles
+#generate counts data using bedtools, making all the slender data in one file, all the stumpy data in another file
+mkdir ./counts_data
+
+for i in ./data/*Slender.sorted.bam
+do
+bedtools multicov -bams $i -bed /localdisk/data/BPSM/Assignment1/Tbbgenes.bed >> ./counts_data/Slender_counts.bed
+done
+
+for m in ./data/*Stumpy.sorted.bam
+do
+bedtools multicov -bams $m -bed /localdisk/data/BPSM/Assignment1/Tbbgenes.bed >> ./counts_data/Stumpy_counts.bed
+done
+
+#sort the Slender and Stumpy counts file
+sort -k1,1 -k2,2n -V ./data/Slender_counts.bed > ./counts_data/Slender_counts_sorted.bed
+sort -k1,1 -k2,2n -V ./data/Stumpy_counts.bed > ./counts_data/Stumpy_counts_sorted.bed
 
