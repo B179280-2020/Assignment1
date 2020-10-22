@@ -56,3 +56,9 @@ done
 sort -k1,1 -k2,2n -V ./data/Slender_counts.bed > ./counts_data/Slender_counts_sorted.bed
 sort -k1,1 -k2,2n -V ./data/Stumpy_counts.bed > ./counts_data/Stumpy_counts_sorted.bed
 
+#calculate the mean of the counts per gene for slender and stumpy samples
+
+bedtools groupby -i ./counts_data/Slender_counts_sorted.bed -g 1-4 -c 7 -o mean > ./counts_data/average_Slender_counts.bed
+bedtools groupby -i ./counts_data/Stumpy_counts_sorted.bed -g 1-4 -c 7 -o mean > ./counts_data/average_Stumpy_counts.bed
+
+
