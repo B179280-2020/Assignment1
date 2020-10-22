@@ -67,6 +67,6 @@ awk '{print $4;}' ./counts_data/average_Slender_counts.bed > ./counts_data/genen
 awk '{print $5;}' ./counts_data/average_Slender_counts.bed > ./counts_data/onlySlender.txt
 awk '{print $5;}' ./counts_data/average_Stumpy_counts.bed > ./counts_data/onlyStumpy.txt
 paste ./counts_data/genename.txt ./counts_data/onlySlender.txt ./counts_data/onlyStumpy.txt > Average_counts_whole.txt
-sed -i '1i\Gene name\tMean for slender samples\tMean for stumpy samples' Average_counts_whole.txt
-
+sed -i '1i\Gene name\tSlender mean\tStumpy mean' Average_counts_whole.txt
+#completed
 
