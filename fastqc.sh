@@ -54,8 +54,8 @@ bedtools multicov -bams $m -bed /localdisk/data/BPSM/Assignment1/Tbbgenes.bed >>
 done
 
 #sort the Slender and Stumpy counts file
-sort -k1,1 -k2,2n -V ./counts_data/Slender_counts.bed > ./counts_data/Slender_counts_sorted.bed
-sort -k1,1 -k2,2n -V ./counts_data/Stumpy_counts.bed > ./counts_data/Stumpy_counts_sorted.bed
+sort -k1,1 -k2,2n ./counts_data/Slender_counts.bed > ./counts_data/Slender_counts_sorted.bed
+sort -k1,1 -k2,2n ./counts_data/Stumpy_counts.bed > ./counts_data/Stumpy_counts_sorted.bed
 
 #calculate the mean of the counts per gene for slender and stumpy samples
 
@@ -66,7 +66,7 @@ bedtools groupby -i ./counts_data/Stumpy_counts_sorted.bed -g 1-4 -c 7 -o mean >
 awk '{print $4;}' ./counts_data/average_Slender_counts.bed > ./counts_data/genename.txt
 awk '{print $5;}' ./counts_data/average_Slender_counts.bed > ./counts_data/onlySlender.txt
 awk '{print $5;}' ./counts_data/average_Stumpy_counts.bed > ./counts_data/onlyStumpy.txt
-paste ./counts_data/genename.txt ./counts_data/onlySlender.txt ./counts_data/onlyStumpy.txt > Average_counts_whole.txt
-sed -i '1i\Gene name\tSlender mean\tStumpy mean' Average_counts_whole.txt
+echo -e "Gene name \tSlender mean \tStumpy mean" > Average_counts_whole.txt
+paste ./counts_data/genename.txt ./counts_data/onlySlender.txt ./counts_data/onlyStumpy.txt >> Average_counts_whole.txt
 #completed
 
